@@ -60,6 +60,24 @@ You don't need to do anything about them unless being asked.
 
 ### For Generated Skills (Type 1)
 
+#### Adding a New Project
+
+1. **Add entry to `meta.ts`** in the `submodules` object:
+   ```ts
+   export const submodules = {
+     // ... existing entries
+     'new-project': 'https://github.com/org/repo',
+   }
+   ```
+
+2. **Run sync script** to clone the submodule:
+   ```bash
+   nr sync init
+   ```
+   This will clone the repository to `sources/{project}/`
+
+3. **Follow the generation guide** below to create the skills
+
 #### General Instructions for Generation
 
 - Focus on agents capabilities and practical usage patterns. For user-facing guides, introductions, get-started, or common knowledge that LLM agents already know, you can skip those content.
