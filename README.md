@@ -9,7 +9,7 @@ A curated collection of [agent skills](https://agentskills.io/home) reflecting [
 ## Installation
 
 ```bash
-npx skills add antfu/skills
+pnpx skills add antfu/skills --all
 ```
 
 Learn more about CLI usage at [skills](https://github.com/vercel-labs/skills).
