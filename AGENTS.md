@@ -16,22 +16,22 @@ There are two types of skill sources. The project lists are defined in `meta.ts`
 
 For OSS projects **without existing skills**. We clone the repo as a submodule and generate skills from their documentation.
 
-- **Projects:** Vue, Nuxt, Vite, UnoCSS
+- **Projects:** Angular, Angular Material, AngularFire
 - **Workflow:** Read docs → Understand → Generate skills
-- **Source:** `sources/{project}/docs/`
+- **Source:** `sources/{project}`
 
 ### Type 2: Synced Skills (`vendor/`)
 
 For projects that **already maintain their own skills**. We clone their repo as a submodule and sync specified skills to ours.
 
-- **Projects:** Slidev, VueUse
+- **Projects:** None
 - **Workflow:** Pull updates → Copy specified skills (with optional renaming)
 - **Source:** `vendor/{project}/skills/{skill-name}/`
 - **Config:** Each vendor specifies which skills to sync and their output names in `meta.ts`
 
 ### Type 3: Hand-written Skills
 
-For skills that are written by Anthony Fu with his preferences, experience, tastes and best practices.
+For skills that are written by Gerome Grignon with his preferences, experience, tastes and best practices.
 
 You don't need to do anything about them unless being asked.
 
@@ -44,8 +44,7 @@ You don't need to do anything about them unless being asked.
 │   └── {project}.md            # Instructions for generating skills for {project}
 │ 
 ├── sources/                    # Type 1: OSS repos (generate from docs)
-│   └── {project}/
-│       └── docs/               # Read documentation from here
+│   └── {project}/              # Read documentation from here
 │
 ├── vendor/                     # Type 2: Projects with existing skills (sync only)
 │   └── {project}/
@@ -90,21 +89,51 @@ You don't need to do anything about them unless being asked.
 - Focus on agents capabilities and practical usage patterns. For user-facing guides, introductions, get-started, or common knowledge that LLM agents already know, you can skip those content.
 - Categorize each references into `core`, `features`, `best-practices`, `advanced`, etc categories, and prefix the reference file name with the category. For each feature field, feel free to create more categories if needed to better organize the content.
 
+#### Exploration Strategy (IMPORTANT)
+
+Before writing any skills, **systematically explore the full documentation scope**:
+
+1. **Create full inventory first**
+   ```bash
+   # List all doc directories to understand structure
+   ls sources/{project}/docs/
+   # Or find all markdown files
+   find sources/{project} -name "*.md" -type f | head -100
+   ```
+
+2. **Map all topics** — Create a mental (or written) map of all documentation areas before deciding what to cover. Don't rely on memory or assumptions about what topics exist.
+
+3. **Prioritize by agent usefulness**
+   | Priority | Topics | Rationale |
+   |----------|--------|-----------|
+   | **High** | Core APIs, common patterns, configuration | Agents use these constantly |
+   | **Medium** | Testing, advanced features, integrations | Useful but less frequent |
+   | **Low** | i18n, accessibility details, migration guides | Rarely needed by agents |
+
+4. **Plan coverage before writing** — Decide upfront which topics to cover and which to skip. Document skipped topics and why (e.g., "skipped i18n — rarely needed by agents").
+
+5. **Use parallel exploration** — For large doc sets, use multiple Task agents to explore different topic areas simultaneously, then consolidate findings.
+
+6. **Iterate systematically** — Generate core skills first, verify coverage, then add features in batches. Don't try to do everything in one pass.
+
 #### Creating New Skills
 
-- **Read** source docs from `sources/{project}/docs/`
-- **Read** the instructions in `instructions/{project}.md` for specific generation instructions if exists
-- **Understand** the documentation thoroughly
-- **Create** skill files in `skills/{project}/references/`
-- **Create** `SKILL.md` index listing all skills
-- **Create** `GENERATION.md` with the source git SHA
+1. **Explore** — Follow the exploration strategy above to understand full doc scope
+2. **Plan** — Decide which topics to cover based on agent usefulness
+3. **Read** source docs from `sources/{project}/`
+4. **Read** the instructions in `instructions/{project}.md` for specific generation instructions if exists
+5. **Understand** the documentation thoroughly
+6. **Create** skill files in `skills/{project}/references/`
+7. **Create** `SKILL.md` index listing all skills
+8. **Create** `GENERATION.md` with the source git SHA
+9. **Verify** — List created files and compare against your coverage plan
 
 #### Updating Generated Skills
 
 1. **Check** git diff since the SHA recorded in `GENERATION.md`:
    ```bash
    cd sources/{project}
-   git diff {old-sha}..HEAD -- docs/
+   git diff {old-sha}..HEAD
    ```
 2. **Update** affected skill files based on changes
 3. **Update** `SKILL.md` with the new version of the tool/project and skills table.
@@ -144,9 +173,9 @@ Also record the version of the tool/project when the skills were generated.
 name: {name}
 description: {description}
 metadata:
-  author: Anthony Fu
+  author: Gerome Grignon
   version: "2026.1.1"
-  source: Generated from {source-url}, scripts located at https://github.com/antfu/skills
+  source: Generated from {source-url}, scripts located at https://github.com/angular-sanctuary/angular-agent-skills
 ---
 
 > The skill is based on {project} v{version}, generated at {date}.
