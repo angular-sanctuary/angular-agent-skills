@@ -5,14 +5,16 @@ A curated collection of Angular [Agent Skills](https://agentskills.io/home).
 
 ## Installation
 
+To install a specific skill:
+
 ```bash
-npx skills add angular-sanctuary/angular-agent-skills --skill='angular-material'
+npx skills add angular-sanctuary/angular-agent-skills --skill angular-material
 ```
 
-or to install all of them globally:
+or to install all skills:
 
 ```bash
-npx skills add angular-sanctuary/angular-agent-skills --skill='angular-material' -g
+npx skills add angular-sanctuary/angular-agent-skills 
 ```
 
 Learn more about the CLI usage at [skills](https://github.com/vercel-labs/skills).
@@ -26,12 +28,12 @@ npx skills add angular-sanctuary/angular-agent-skills --skill='angular-material'
 
 Angular Fire
 ```bash
-npx skills add angular-sanctuary/angular-agent-skills --skill='angular-fire'
+npx skills add angular-sanctuary/angular-agent-skills --skill angular-fire
 ```
 
 Angular Aria
 ```bash
-npx skills add angular-sanctuary/angular-agent-skills --skill='angular-aria'
+npx skills add angular-sanctuary/angular-agent-skills --skill angular-aria
 ```
 
 ## Skills
