@@ -21,17 +21,17 @@ Learn more about the CLI usage at [skills](https://github.com/vercel-labs/skills
 
 Angular Material
 ```bash
-npx skills list angular-sanctuary/angular-agent-skills --skill='angular-material'
+npx skills add angular-sanctuary/angular-agent-skills --skill='angular-material'
 ```
 
 Angular Fire
 ```bash
-npx skills list angular-sanctuary/angular-agent-skills --skill='angular-fire'
+npx skills add angular-sanctuary/angular-agent-skills --skill='angular-fire'
 ```
 
 Angular Aria
 ```bash
-npx skills list angular-sanctuary/angular-agent-skills --skill='angular-aria'
+npx skills add angular-sanctuary/angular-agent-skills --skill='angular-aria'
 ```
 
 ## Skills
